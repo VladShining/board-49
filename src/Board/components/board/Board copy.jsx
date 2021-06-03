@@ -11,13 +11,7 @@ function Board() {
 
     const firestore = firebase.firestore();
     const ref = firestore.collection('board');
-    const dataStore=localStorage.getItem("data49");
-    let dataUsed =initialData
-    if (dataStore){
-        dataUsed = JSON.parse(dataStore)
-        // console.log(dataUsed)
-    }
-    const [data, setState] = useState(dataUsed)
+    const [data, setState] = useState()
 
 useEffect(() => {
     const firestore = firebase.firestore();
@@ -40,7 +34,7 @@ const change = (prop)=>{
         // console.log("Document successfully written!");
     })
     .catch((error) => {
-        console.log("Error writing document: ", error);
+        console.error("Error writing document: ", error);
     });
     }
     update()
@@ -106,7 +100,7 @@ const addColumn=()=>{
  }
  const onDragEnd = result =>{
     document.body.style.backgroundColor ='inherite'
-    console.clear()
+
     const {destination,source,draggableId }=result;
     if(!destination){ 
         return;
@@ -168,9 +162,7 @@ const onDragUpdate=(update)=>{
 const onDragStart=()=>{
     document.body.style.transition = 'background-color 0.2s ease';
 }
-const manualSave=()=>{
-    localStorage.setItem('data49',JSON.stringify(data))
-}
+
     return (
         <div className="board">
             <DragDropContext 
@@ -194,8 +186,7 @@ const manualSave=()=>{
                 <button onClick={addColumn} >
                     Nouveau Colonne 
                 </button>
-                <button onClick={manualSave} id='save'>save</button>
-            </div>
+        </div>
         </div>
     )
 }
