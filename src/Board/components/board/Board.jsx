@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import {v4 as uuidv4 } from 'uuid';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Column from '../../components/Draggabletest/Column';
@@ -9,42 +9,39 @@ import initialData from './initData';
 
 function Board() {
 
-    const firestore = firebase.firestore();
-    const ref = firestore.collection('board');
     const dataStore=localStorage.getItem("data49");
     let dataUsed =initialData
     if (dataStore){
         dataUsed = JSON.parse(dataStore)
-        // console.log(dataUsed)
     }
     const [data, setState] = useState(dataUsed)
 
-useEffect(() => {
-    const firestore = firebase.firestore();
-    const ref = firestore.collection('board');
-    ref.doc("data").get().then((doc) => {
-        const Data = doc.data()
-        setState(Data)
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
-},[])
-useEffect(() => {
-    data && change(data)
-    // eslint-disable-next-line
-},[data])
+// useEffect(() => {
+//     const firestore = firebase.firestore();
+//     const ref = firestore.collection('board');
+//     ref.doc("data").get().then((doc) => {
+//         const Data = doc.data()
+//         setState(Data)
+//     }).catch((error) => {
+//         console.log("Error getting document:", error);
+//     });
+//  },[])
+// useEffect(() => {
+//     data && change(data)
+//     // eslint-disable-next-line
+// },[data])
 
-const change = (prop)=>{
-    const update = async(e) => {
-        await ref.doc("data").set(prop).then(() => {
-        // console.log("Document successfully written!");
-    })
-    .catch((error) => {
-        console.log("Error writing document: ", error);
-    });
-    }
-    update()
-}
+// const change = (prop)=>{
+//     const update = async(e) => {
+//         await ref.doc("data").set(prop).then(() => {
+//         // console.log("Document successfully written!");
+//     })
+//     .catch((error) => {
+//         console.log("Error writing document: ", error);
+//     });
+//     }
+//     update()
+// }
 
 const addTask=()=>{
     
@@ -72,7 +69,7 @@ function removeTask(id){
         el[i].taskIds=el[i].taskIds.filter(ele=>ele!==id)
     }
     delete data.tasks[id]
-    change(data)
+    // change(data)
    
 }
 const addColumn=()=>{
@@ -101,7 +98,7 @@ const addColumn=()=>{
     else{
         delete data.columns[id];
         data.columnOrder=data.columnOrder.filter(ele=>ele!==id)
-        change(data)
+        // change(data)
     };
  }
  const onDragEnd = result =>{
@@ -171,7 +168,24 @@ const onDragStart=()=>{
 const manualSave=()=>{
     localStorage.setItem('data49',JSON.stringify(data))
 }
-    return (
+const onLineLoad=()=>{
+    const ref =firebase.firestore().collection('board');
+    ref.doc("data").get().then((doc) => {
+        const Data = doc.data()
+        setState(Data)
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+}
+const onLineSave=async(e)=>{
+    const ref =firebase.firestore().collection('board');
+    await ref.doc("data").set(data).then(() => {
+    }).catch((error) => {
+        console.log("Error writing document: ", error);
+    });  
+}
+    
+return (
         <div className="board">
             <DragDropContext 
                 onDragStart={onDragStart}
@@ -195,6 +209,8 @@ const manualSave=()=>{
                     Nouveau Colonne 
                 </button>
                 <button onClick={manualSave} id='save'>save</button>
+                <button onClick={onLineSave} id='onlinesave'>save online</button>
+                <button onClick={onLineLoad} id='onlineload'>load</button>
             </div>
         </div>
     )

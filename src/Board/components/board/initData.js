@@ -1,6 +1,6 @@
 const initialData= {
     tasks : {
-        'task-1':{id:'task-1',content:'Nothing to begin'}
+        'task-1':{id:'task-1',content:'Nothing to begin',description:'desc',createAt:''}
     },
     columns:{
         'column-1':{
