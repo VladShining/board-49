@@ -5,7 +5,7 @@ const initialData= {
     columns:{
         'column-1':{
             id:'column-1',
-            title:'Todo',
+            title:'Open',
             taskIds:['task-1']
         },
     },

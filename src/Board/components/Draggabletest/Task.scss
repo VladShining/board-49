@@ -1,7 +1,36 @@
-.task{
-    color : white;
-    background-color: blue;
-    font-size: 24px;
-    margin: 10px;
-    
+.task {
+  color: #92abcd;
+  background-color: #212c3d;
+  font-size: 24px;
+  margin: 5px;
+  padding: 0.2em;
+  box-sizing: border-box;
+  border: 1px solid #ff0028;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  border-radius: 2px;
+  box-shadow: 0px 0px 7px black;
+
+  .icon {
+    // float: right;
+    cursor: pointer;
+    img {
+      width: 16px;
+      height: 16px;
+      &:hover {
+        background-color: rgb(0, 0, 0);
+        border-radius: 50%;
+      }
+    }
+  }
+  .title {
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 10px;
+    font-family: monospace;
+  }
 }

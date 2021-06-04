@@ -1,0 +1,12 @@
+.board {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.boutton {
+  position: absolute;
+  bottom: 0;
+  margin-top: 50%;
+}

@@ -1,0 +1,37 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #040609;
+  padding: 0;
+  margin: 0;
+}
+@media screen and (max-width: 1366px) {
+  //ecran moyenn
+  .container {
+    display: flex;
+    // background-color: yellow;
+  }
+}
+@media screen and (max-width: 1024px) {
+  //ecransmall
+  .container {
+    display: flex;
+    // background-color: orangered;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  //tablette
+  .container {
+    display: flex;
+    // background-color: red;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  //phone
+  .container {
+    display: flex;
+    // background-color: violet;
+  }
+}

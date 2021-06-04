@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
-import Board from './Board/components/board/Board';
+import './App.scss';
+// import Board from './Board/components/board/Board';
+import BoardContainer from './Board/container/board-container'
+import Nav from './Nav/Nav-container'
 
 function App() {
   return (
     <div className="App">
-      <Board/>
+      <Nav/>
+      <BoardContainer/>
     </div>
   );
 }

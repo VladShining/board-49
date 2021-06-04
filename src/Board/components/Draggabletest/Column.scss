@@ -1,0 +1,40 @@
+.icon {
+  * {
+    margin: 0;
+    transition: all 0.5s;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    li {
+      width: 1em;
+      height: 1em;
+      //border: solid 1px grey;
+      text-align: center;
+      border-radius: 5px;
+      padding: 0;
+      margin: 0 0.5em;
+      cursor: pointer;
+      &:hover {
+        background-color: #111;
+      }
+      &:hover svg g path {
+        fill: white;
+      }
+      img {
+        fill: white;
+        width: 12px;
+        height: 12px;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}
+.drop {
+  max-width: 300px;
+  margin: 7px;
+}

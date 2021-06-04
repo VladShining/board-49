@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import   './Task.scss'
 
 const Container = styled.div`
-    background-color: ${props => (props.isDragging && 'red')};
+    background-color: ${props => (props.isDragging && '#eee')};
 `;
 
 export default class Task extends Component {
@@ -22,8 +22,9 @@ export default class Task extends Component {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}  //ito no midesignez ny element andraisana azy (handle)
                 isDragging={snapshot.isDragging}
-            >{this.props.task.content}
-            <p onClick={this.removeTask}>X</p>
+                >
+                    <div className="title">{this.props.task.content}</div>
+                    <div className="icon" onClick={this.removeTask}><img src="/assets/icon/minus.svg" alt=""/></div>
             </Container>
             
             )}

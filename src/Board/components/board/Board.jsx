@@ -6,6 +6,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 // eslint-disable-next-line
 import initialData from './initData';
+import './Board.scss';
 
 function Board() {
 
@@ -199,7 +200,7 @@ return (
                 })}
 
             </DragDropContext>
-            <div>
+            <div className="boutton">
                 <input type='text' id='task'/>
                 <button onClick={addTask} >
                     Ajout Tache 
