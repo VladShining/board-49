@@ -5,6 +5,13 @@
   align-items: stretch;
   align-content: flex-start;
 }
+.boards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: flex-start;
+}
 .boutton {
   display: inline-flex;
   justify-content: center;
@@ -41,11 +48,39 @@
     text-align: center;
     padding: 0;
     right: 0;
-    margin-left: 0.5rem;
+    margin-left: 0.3rem;
+    margin-right: 5px;
     box-shadow: 0 0 8px #ff0028;
     &:hover {
       box-shadow: 0 0 8px #040609 inset;
       cursor: pointer;
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .boards {
+    width: 100vw;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+  }
+  .board {
+    ::-webkit-scrollbar {
+      display: initial !important;
+      width: 10px !important;
+      position: absolute;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #040609 !important;
+      border: #ff0028 1px solid;
+      border-radius: 1em;
+      // box-shadow: 0 0 7px #ff0028;
+    }
+    ::-webkit-scrollbar-track-piece {
+      background-color: #040609;
     }
   }
 }

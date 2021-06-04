@@ -32,10 +32,17 @@ const Header = styled.div`
     align-content: center;
     padding: 0.2em 0;
     position :sticky;
-    top:35px;
+    top:37px;
     background-color:#212c3d;
     width:250px;
-    box-shadow: 0px -3px 7px 4px #ff0028;
+    box-shadow: 0px 0px 7px #ff0028;
+    
+@media screen and (max-width: 383px) {
+    top:60px;
+}
+@media screen and (min-width: 1024px) {
+    top:0;
+}
 
 `;
 export default class Column extends Component {

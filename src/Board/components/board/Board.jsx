@@ -199,6 +199,7 @@ return (
                 <button onClick={onLineLoad} id='onlineload'>↓</button>
                 </div>
             </div>
+            <div className='boards'>
             <DragDropContext 
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
@@ -212,6 +213,7 @@ return (
                 })}
 
             </DragDropContext>
+            </div>
         </div>
     )
 }
