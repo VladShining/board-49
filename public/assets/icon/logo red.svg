@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="262.65" height="235.5" viewBox="0 0 262.65 235.5">
+  <defs>
+    <filter id="Tracé_1" x="0" y="0" width="161.325" height="196.304" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-color="#ff0028"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Polygone_3" x="101.325" y="0" width="161.325" height="196.304" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-2"/>
+      <feFlood flood-color="#ff0028"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Polygone_4" x="33.945" y="136.304" width="194.761" height="99.196" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-3"/>
+      <feFlood flood-color="#ff0028"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Groupe_6" data-name="Groupe 6" transform="translate(-766.917 -148.321)">
+    <g transform="matrix(1, 0, 0, 1, 766.92, 148.32)" filter="url(#Tracé_1)">
+      <g id="Tracé_1-2" data-name="Tracé 1" transform="matrix(0.5, -0.87, 0.87, 0.5, 30, 146.71)" fill="#fff">
+        <path d="M 132.9065551757813 38.69600677490234 L 1.853929996490479 38.69600677490234 L 67.38024139404297 0.5784586668014526 L 132.9065551757813 38.69600677490234 Z" stroke="none"/>
+        <path d="M 67.38024139404297 1.156883239746094 L 3.707809448242188 38.19600677490234 L 131.0526733398438 38.19600677490234 L 67.38024139404297 1.156883239746094 M 67.38024139404297 3.814697265625e-06 L 134.7604827880859 39.19600677490234 L 0 39.19600677490234 L 67.38024139404297 3.814697265625e-06 Z" stroke="none" fill="#ff0028"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 766.92, 148.32)" filter="url(#Polygone_3)">
+      <g id="Polygone_3-2" data-name="Polygone 3" transform="translate(165.27 30) rotate(60)" fill="#fff">
+        <path d="M 132.9066467285156 38.69600296020508 L 1.853922486305237 38.69600296020508 L 67.38028717041016 0.5784547328948975 L 132.9066467285156 38.69600296020508 Z" stroke="none"/>
+        <path d="M 67.38028717041016 1.156879425048828 L 3.707794189453125 38.19600296020508 L 131.0527801513672 38.19600296020508 L 67.38028717041016 1.156879425048828 M 67.38028717041016 0 L 134.7605743408203 39.19600296020508 L 0 39.19600296020508 L 67.38028717041016 0 Z" stroke="none" fill="#ff0028"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 766.92, 148.32)" filter="url(#Polygone_4)">
+      <g id="Polygone_4-2" data-name="Polygone 4" transform="translate(198.71 205.5) rotate(180)" fill="#fff">
+        <path d="M 132.9066162109375 38.69599914550781 L 1.853924989700317 38.69599914550781 L 67.38027191162109 0.5784528851509094 L 132.9066162109375 38.69599914550781 Z" stroke="none"/>
+        <path d="M 67.38027191162109 1.156875610351563 L 3.707794189453125 38.19599914550781 L 131.0527496337891 38.19599914550781 L 67.38027191162109 1.156875610351563 M 67.38027191162109 0 L 134.7605438232422 39.19599914550781 L 0 39.19599914550781 L 67.38027191162109 0 Z" stroke="none" fill="#ff0028"/>
+      </g>
+    </g>
+  </g>
+</svg>

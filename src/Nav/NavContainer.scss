@@ -1,4 +1,5 @@
 .navbar {
+  min-width: 300px;
   background-color: #212c3d;
   width: 100vw;
   height: 20px;
@@ -9,13 +10,37 @@
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: 10px;
+  svg,
   img {
     height: 20px;
-    padding: 0 10px;
+    padding: 0 7px;
+  }
+  .menu {
+    display: none;
   }
 }
-@media all and (min-width: 400px) {
+
+@media screen and (min-width: 760px) {
   .navbar {
-    justify-content: space-around;
+    height: 30px;
+    justify-content: flex-start;
+    img {
+      height: 30px;
+    }
+    svg {
+      display: none;
+    }
+    .menu {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-end;
+      ul {
+        li {
+          color: aliceblue;
+        }
+        list-style: none;
+      }
+    }
   }
+  //tablette
 }

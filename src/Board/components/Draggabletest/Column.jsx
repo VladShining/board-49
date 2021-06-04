@@ -32,28 +32,42 @@ const Header = styled.div`
     align-content: center;
     padding: 0.2em 0;
     position :sticky;
-    top:0;
+    top:35px;
     background-color:#212c3d;
     width:250px;
-    box-shadow: 0px -3px 7px #ff0028;
+    box-shadow: 0px -3px 7px 4px #ff0028;
 
 `;
 export default class Column extends Component {
-  
-  delete=()=>{
-    this.props.deleteCol(this.props.column.id)
-    //   console.log(this.props.column.id);
-  }
-       render() {
+  isOpen=false;
+  isLast=()=>(this.props.lastCol[0]!==this.props.column.id)
+  delete=()=>{this.props.deleteCol(this.props.column.id)}
+  toogleCreate=()=>{this.isOpen=true}
+  closeCreate=()=>{this.isOpen=false}
+addTask=()=>{
+    this.props.addTask(this.props.column.id);
+}
+  render() {
         return (
-        <div className="drop">
+        <div className="drop" onMouseLeave={this.closeCreate}>
             <Header>
                 <Title>
                     {this.props.column.title}
                 </Title>
                     <div className="icon" >
                         <ul>
-                            <li><img src="/assets/icon/add.svg" alt=""/></li>
+                            <li onClick={this.toogleCreate}><svg id="add" xmlns="http://www.w3.org/2000/svg" width="12.914" height="12.914" viewBox="0 0 12.914 12.914">
+                                <g id="Groupe_33" data-name="Groupe 33">
+                                    <g id="Groupe_32" data-name="Groupe 32">
+                                    <path id="Tracé_11" data-name="Tracé 11" d="M10.608,0h-8.3A2.309,2.309,0,0,0,0,2.306v8.3a2.309,2.309,0,0,0,2.306,2.306h8.3a2.309,2.309,0,0,0,2.306-2.306v-8.3A2.309,2.309,0,0,0,10.608,0Zm1.384,10.608a1.384,1.384,0,0,1-1.384,1.384h-8.3A1.384,1.384,0,0,1,.922,10.608v-8.3A1.384,1.384,0,0,1,2.306.922h8.3a1.384,1.384,0,0,1,1.384,1.384Z" fill="#707070"/>
+                                    </g>
+                                </g>
+                                <g id="Groupe_35" data-name="Groupe 35" transform="translate(3.69 3.69)">
+                                    <g id="Groupe_34" data-name="Groupe 34">
+                                    <path id="Tracé_12" data-name="Tracé 12" d="M141.607,138.839h-1.845v-1.845a.461.461,0,0,0-.922,0v1.845h-1.845a.461.461,0,1,0,0,.922h1.845v1.845a.461.461,0,1,0,.922,0v-1.845h1.845a.461.461,0,1,0,0-.922Z" transform="translate(-136.533 -136.533)" fill="#707070"/>
+                                    </g>
+                                </g>
+                                </svg></li>
                             <li><svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" width="12.996" height="12.935" viewBox="0 0 12.996 12.935">
                                 <g id="Calque_1" data-name="Calque 1" transform="translate(0 0)">
                                     <path id="Tracé_294" data-name="Tracé 294" d="M12,8.12a.32.32,0,0,0-.32.32v2.87a1,1,0,0,1-1,1H1.62a1,1,0,0,1-1-1V2.88a1,1,0,0,1,1-1H4.49a.325.325,0,1,0,0-.65H1.62A1.62,1.62,0,0,0,0,2.88v8.44a1.62,1.62,0,0,0,1.62,1.62H10.7a1.62,1.62,0,0,0,1.62-1.62V8.44A.32.32,0,0,0,12,8.12Zm0,0" transform="translate(0 -0.005)" fill="#707070"/>
@@ -61,35 +75,39 @@ export default class Column extends Component {
                                 </g>
                                 </svg>
                             </li>
-                            <li onClick={this.delete}><svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" width="11.47" height="12.3" viewBox="0 0 11.47 12.3">
+                          {this.isLast() && 
+                          <li onClick={this.delete}><svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" width="11.47" height="12.3" viewBox="0 0 11.47 12.3">
                                 <g id="Calque_1" data-name="Calque 1">
                                     <path id="Tracé_292" data-name="Tracé 292" d="M9.17,12.3H2.28a.48.48,0,0,1-.48-.44L1,2.81H0v-1H11.47v1h-1l-.8,9.05A.48.48,0,0,1,9.17,12.3Zm-6.45-1h6l.75-8.53H2ZM7.87,9.9h-1l.21-5.7h1ZM3.6,9.9,3.39,4.2h1L4.6,9.9Zm2.62,0h-1V4.22h1Z" transform="translate(0 0)" fill="#707070"/>
                                     <path id="Tracé_293" data-name="Tracé 293" d="M8.11,2.33h-1V1H4.32V2.33h-1V.8a.8.8,0,0,1,.8-.8H7.31a.8.8,0,0,1,.8.8Z" fill="#707070"/>
                                 </g>
                                 </svg>
-                            </li>
+                            </li>}
                         </ul>
                     </div>
+                  { this.isOpen &&
+                   <div className="form" >
+                        <input type='text' id='task' maxLength='14'/>
+                         <button onClick={this.addTask} >
+                            +
+                        </button> 
+                    </div>
+                    }
             </Header>
             <Droppable droppableId={this.props.column.id}>
                 {(provided,snapshot)=>(
                 <Container ref={provided.innerRef} 
                     {...provided.droppableProps} 
                     isDraggingOver={snapshot.isDraggingOver} 
-                   
                 >  
                     {this.props.tasks.map((task,index) => (
                     <Task key={task.id} task={task} index={index} delete={this.props.delete} />
                 ))
                     }  
                     {provided.placeholder}
-                  
-                   
                 </Container>
             )}
-            
             </Droppable>
-            
         </div>
         );
     }

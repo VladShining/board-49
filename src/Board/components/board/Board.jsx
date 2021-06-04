@@ -44,8 +44,7 @@ function Board() {
 //     update()
 // }
 
-const addTask=()=>{
-    
+const addTask=(id)=>{
     let el = document.getElementById('task').value;
     if(el){
         const elID=uuidv4()
@@ -55,11 +54,11 @@ const addTask=()=>{
             ...data.tasks,
             [elID]:{id:elID,content:el} 
         }}
-    // data=newtask;
     setState(newtask)
-    data.columns[Object.keys(data.columns)[0]].taskIds.push(elID)
-    
+    // data.columns[Object.keys(data.columns)[id]].taskIds.push(elID)
+    data.columns[id].taskIds.push(elID)   
 }
+document.getElementById('task').value='';
 }
 
 function removeTask(id){
@@ -89,6 +88,7 @@ const addColumn=()=>{
      data.columnOrder.push(colID);
      
       }
+      document.getElementById('column').value=''
  }
  function removeColumn(id){
     const colContent = data.columns[id].taskIds
@@ -188,6 +188,17 @@ const onLineSave=async(e)=>{
     
 return (
         <div className="board">
+             <div className="boutton">
+                <input type='text' id='column' maxLength='9'/>
+                <div>
+                <button onClick={addColumn}>
+                    +
+                </button>
+                <button onClick={manualSave} id='save'>↑</button>
+                <button onClick={onLineSave} id='onlinesave'>▼</button>
+                <button onClick={onLineLoad} id='onlineload'>↓</button>
+                </div>
+            </div>
             <DragDropContext 
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
@@ -195,24 +206,12 @@ return (
             >
                 {data && data.columnOrder.map(columnId =>{
                     const column =data.columns[columnId];
+                    const lastCol=data.columnOrder;
                     const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
-                    return (<Column key={column.id} column={column} tasks={tasks} deleteCol={removeColumn} delete={removeTask}/> );
+                    return (<Column key={column.id} lastCol={lastCol} column={column} tasks={tasks} addTask={addTask} deleteCol={removeColumn} delete={removeTask}/> );
                 })}
 
             </DragDropContext>
-            <div className="boutton">
-                <input type='text' id='task'/>
-                <button onClick={addTask} >
-                    Ajout Tache 
-                </button>
-                <input type='text' id='column' required/>
-                <button onClick={addColumn} >
-                    Nouveau Colonne 
-                </button>
-                <button onClick={manualSave} id='save'>save</button>
-                <button onClick={onLineSave} id='onlinesave'>save online</button>
-                <button onClick={onLineLoad} id='onlineload'>load</button>
-            </div>
         </div>
     )
 }
