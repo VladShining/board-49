@@ -1,5 +1,5 @@
 {
-  "short_name": "Nca-49",
+  "short_name": "Board-49",
   "name": "Platform-49",
   "icons": [
     {
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#111111",
-  "background_color": "#eee"
+  "theme_color": "#ff0028",
+  "background_color": "#1a2230"
 }

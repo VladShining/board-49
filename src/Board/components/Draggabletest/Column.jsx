@@ -54,6 +54,11 @@ export default class Column extends Component {
 addTask=()=>{
     this.props.addTask(this.props.column.id);
 }
+onKeyDownValue(event) {
+    if (event.charCode === 13 || event.charCode === 32) {
+        this.addTask();
+      }
+}
   render() {
         return (
         <Draggable draggableId={this.props.column.id} index={this.props.index}>
@@ -96,7 +101,7 @@ addTask=()=>{
                     </div>
                   { this.isOpen &&
                    <div className="form" >
-                        <input type='text' id='task' maxLength='14'/>
+                        <input type='text' id='task' maxLength='14'  onKeyPress={this.onKeyDownValue.bind(this)}/>
                          <button onClick={this.addTask} >
                             +
                         </button> 

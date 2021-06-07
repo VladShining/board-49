@@ -200,7 +200,7 @@ const onLineSave=async(e)=>{
 return (
         <div className="board">
              <div className="boutton">
-                <input type='text' id='column' maxLength='9'/>
+                <input type='text' id='column' maxLength='9' />
                 <div>
                 <button onClick={addColumn}>➕</button>
                 <button onClick={manualSave} id='save'>💾</button>

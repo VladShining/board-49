@@ -75,10 +75,16 @@
       height: 10px;
     }
     ::-webkit-scrollbar-thumb {
-      background-color: #040609 !important;
+      background-color: #040609;
       border: #ff0028 1px solid;
+      &:hover {
+        background-color: #ff0028;
+      }
+      &:active {
+        background-color: #212c3d;
+      }
+
       border-radius: 1em;
-      // box-shadow: 0 0 7px #ff0028;
     }
     ::-webkit-scrollbar-track-piece {
       background-color: #040609;
