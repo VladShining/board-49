@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Droppable } from 'react-beautiful-dnd';
+import {Droppable,Draggable } from 'react-beautiful-dnd';
 import Task from './Task'
 import styled from'styled-components';
 import './Column.scss';
@@ -56,8 +56,10 @@ addTask=()=>{
 }
   render() {
         return (
-        <div className="drop" onMouseLeave={this.closeCreate}>
-            <Header>
+        <Draggable draggableId={this.props.column.id} index={this.props.index}>
+            {(provided)=>(
+        <div className="drop" onMouseLeave={this.closeCreate} {...provided.draggableProps} ref={provided.innerRef}>
+            <Header {...provided.dragHandleProps}>
                 <Title>
                     {this.props.column.title}
                 </Title>
@@ -101,7 +103,7 @@ addTask=()=>{
                     </div>
                     }
             </Header>
-            <Droppable droppableId={this.props.column.id}>
+            <Droppable droppableId={this.props.column.id} type="task">
                 {(provided,snapshot)=>(
                 <Container ref={provided.innerRef} 
                     {...provided.droppableProps} 
@@ -115,7 +117,9 @@ addTask=()=>{
                 </Container>
             )}
             </Droppable>
-        </div>
+            
+        </div>)}
+        </Draggable>
         );
     }
 }

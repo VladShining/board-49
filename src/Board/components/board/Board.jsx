@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {v4 as uuidv4 } from 'uuid';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext ,Droppable} from 'react-beautiful-dnd';
 import Column from '../../components/Draggabletest/Column';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -105,7 +105,7 @@ const addColumn=()=>{
  const onDragEnd = result =>{
     document.body.style.backgroundColor ='inherite'
     console.clear()
-    const {destination,source,draggableId }=result;
+    const {destination,source,draggableId,type}=result;
     if(!destination){ 
         return;
     }
@@ -113,6 +113,17 @@ const addColumn=()=>{
         destination.index === source.index
     ){ 
             return;
+    }
+    if(type ==='column'){
+        const newColumnOrder =Array.from(data.columnOrder);
+        newColumnOrder.splice(source.index,1)
+        newColumnOrder.splice(destination.index,0,draggableId);
+        const newState ={
+            ...data,
+            columnOrder:newColumnOrder,
+        };
+        setState(newState);
+        return;
     }
     const start = data.columns[source.droppableId];
     const finish = data.columns[destination.droppableId];
@@ -191,27 +202,32 @@ return (
              <div className="boutton">
                 <input type='text' id='column' maxLength='9'/>
                 <div>
-                <button onClick={addColumn}>
-                    +
-                </button>
-                <button onClick={manualSave} id='save'>↑</button>
-                <button onClick={onLineSave} id='onlinesave'>▼</button>
-                <button onClick={onLineLoad} id='onlineload'>↓</button>
+                <button onClick={addColumn}>➕</button>
+                <button onClick={manualSave} id='save'>💾</button>
+                <button onClick={onLineSave} id='onlinesave'>📤</button>
+                <button onClick={onLineLoad} id='onlineload'>📥</button>
                 </div>
             </div>
-            <div className='boards'>
+            <div>
             <DragDropContext 
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 onDragUpdate={onDragUpdate}
-            >
-                {data && data.columnOrder.map(columnId =>{
-                    const column =data.columns[columnId];
-                    const lastCol=data.columnOrder;
-                    const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
-                    return (<Column key={column.id} lastCol={lastCol} column={column} tasks={tasks} addTask={addTask} deleteCol={removeColumn} delete={removeTask}/> );
-                })}
-
+            > 
+                <Droppable droppableId="all-columns" direction="horizontal" type="column">
+                    {(provided)=><div className='boards'
+                    {...provided.droppableProps} 
+                    ref={provided.innerRef}>
+                    {data && data.columnOrder.map((columnId,index) =>{
+                        const column =data.columns[columnId];
+                        const lastCol=data.columnOrder;
+                        const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
+                        return (<Column key={column.id} lastCol={lastCol} column={column} tasks={tasks} addTask={addTask} deleteCol={removeColumn} delete={removeTask} index={index} /> );
+                    })}
+                    {provided.placeholder}
+                    </div>
+                    }
+                </Droppable>
             </DragDropContext>
             </div>
         </div>

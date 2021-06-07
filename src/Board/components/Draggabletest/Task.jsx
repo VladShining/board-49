@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import   './Task.scss'
 
 const Container = styled.div`
-    background-color: ${props => (props.isDragging && '#eee')};
+    background-color: ${props =>props.isDragDisabled ?'#1a2230' : (props.isDragging && '#eee')};
+    border:${props=>props.isDragDisabled && 'none'}
 `;
 
 export default class Task extends Component {
@@ -13,8 +14,9 @@ export default class Task extends Component {
         this.props.delete(this.props.task.id);
     }
     render() {
+        const isDragDisabled=this.props.task.id === 'task-1';
         return( 
-        <Draggable draggableId={this.props.task.id} index={this.props.index}>
+        <Draggable draggableId={this.props.task.id} index={this.props.index} isDragDisabled={isDragDisabled}>
             {(provided,snapshot)=>(
             <Container 
                 className='task'
@@ -22,6 +24,7 @@ export default class Task extends Component {
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}  //ito no midesignez ny element andraisana azy (handle)
                 isDragging={snapshot.isDragging}
+                isDragDisabled={isDragDisabled}
                 >
                     <div className="title">{this.props.task.content}</div>
                     <div className="icon" onClick={this.removeTask}><svg xmlns="http://www.w3.org/2000/svg" width="12.914" height="12.916" viewBox="0 0 12.914 12.916">
