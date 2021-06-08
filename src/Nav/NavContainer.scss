@@ -64,3 +64,25 @@
     z-index: 2;
   }
 }
+@media screen and (min-width: 1917px) {
+  .navbar {
+    height: 40px;
+    align-content: flex-end;
+    justify-content: space-around;
+    .menu {
+      display: none;
+    }
+    svg {
+      animation: rotating 10s linear infinite;
+      vertical-align: center;
+    }
+    @keyframes rotating {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
-import React,{useState} from 'react'
+// eslint-disable-next-line
+import React,{useState,useEffect} from 'react'
 import {v4 as uuidv4 } from 'uuid';
 import { DragDropContext ,Droppable} from 'react-beautiful-dnd';
 import Column from '../../components/Draggabletest/Column';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-// eslint-disable-next-line
 import initialData from './initData';
 import './Board.scss';
 
-function Board() {
+function Board(props) {
 
     const dataStore=localStorage.getItem("data49");
     let dataUsed =initialData
@@ -16,7 +16,7 @@ function Board() {
         dataUsed = JSON.parse(dataStore)
     }
     const [data, setState] = useState(dataUsed)
-
+    
 // useEffect(() => {
 //     const firestore = firebase.firestore();
 //     const ref = firestore.collection('board');
@@ -27,10 +27,10 @@ function Board() {
 //         console.log("Error getting document:", error);
 //     });
 //  },[])
-// useEffect(() => {
-//     data && change(data)
-//     // eslint-disable-next-line
-// },[data])
+useEffect(() => {
+    (props.save) && manualSave()
+    // eslint-disable-next-line
+},[data])
 
 // const change = (prop)=>{
 //     const update = async(e) => {
@@ -48,15 +48,15 @@ const addTask=(id)=>{
     let el = document.getElementById('task').value;
     if(el){
         const elID=uuidv4()
+        data.columns[id].taskIds.push(elID)   
         const newtask = {
             ...data,
             tasks:{
-            ...data.tasks,
-            [elID]:{id:elID,content:el} 
-        }}
-    setState(newtask)
-    // data.columns[Object.keys(data.columns)[id]].taskIds.push(elID)
-    data.columns[id].taskIds.push(elID)   
+                ...data.tasks,
+                [elID]:{id:elID,content:el} 
+            }}
+            setState(newtask)
+            
 }
 document.getElementById('task').value='';
 }
@@ -70,13 +70,13 @@ function removeTask(id){
     }
     delete data.tasks[id]
     // change(data)
-   
 }
 const addColumn=()=>{
     
     var el =document.getElementById('column').value
     if(el){
     const colID=uuidv4()
+    data.columnOrder.push(colID);
     const newColumn ={
         ...data,
         columns:{
@@ -85,10 +85,9 @@ const addColumn=()=>{
         }
      }
      setState(newColumn);
-     data.columnOrder.push(colID);
      
-      }
-      document.getElementById('column').value=''
+    }
+    document.getElementById('column').value=''
  }
  function removeColumn(id){
     const colContent = data.columns[id].taskIds
@@ -179,6 +178,7 @@ const onDragStart=()=>{
 }
 const manualSave=()=>{
     localStorage.setItem('data49',JSON.stringify(data))
+    console.log('successfuk saved')
 }
 const onLineLoad=()=>{
     const ref =firebase.firestore().collection('board');
@@ -196,16 +196,26 @@ const onLineSave=async(e)=>{
         console.log("Error writing document: ", error);
     });  
 }
-    
+const search=()=>{
+    return
+}
+
 return (
         <div className="board">
              <div className="boutton">
+                 <div className="left" >
+                    <label className="lab" onMouseDown={props.tooglesave}>
+                        <input type="checkbox" id="autosave" name="autosave" value='ok'/>
+                        <span className="checkmark"></span>
+                    </label>
+                    <button onClick={onLineSave} id='onlinesave'>📤</button>
+                    <button onClick={onLineLoad} id='onlineload'>📥</button>
+                 </div>
                 <input type='text' id='column' maxLength='9' />
                 <div>
-                <button onClick={addColumn}>➕</button>
-                <button onClick={manualSave} id='save'>💾</button>
-                <button onClick={onLineSave} id='onlinesave'>📤</button>
-                <button onClick={onLineLoad} id='onlineload'>📥</button>
+                    <button onClick={addColumn}>➕</button>
+                    <button onClick={search}>🔍</button>
+                    <button onClick={manualSave} id='save'>💾</button>
                 </div>
             </div>
             <div>
