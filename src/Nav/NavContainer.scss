@@ -10,17 +10,16 @@
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: 10px;
-  svg,
-  img {
+  svg {
     height: 20px;
     width: 20px;
-    padding: 0 7px;
+    padding: 0;
+    border-radius: 50%;
   }
   .menu {
     display: none;
   }
 }
-
 @media screen and (min-width: 760px) {
   .navbar {
     height: 30px;
@@ -55,9 +54,29 @@
     height: 40px;
     align-content: flex-end;
     svg {
+      path {
+        animation: anim 7s linear alternate infinite;
+      }
       height: 40px;
       width: 40px;
       vertical-align: bottom;
+    }
+    @keyframes anim {
+      0% {
+        fill: #ff0028;
+      }
+      25% {
+        fill: #ff5e00;
+      }
+      50% {
+        fill: #11ece5;
+      }
+      75% {
+        fill: #92abcd;
+      }
+      100% {
+        fill: #fff;
+      }
     }
     position: sticky;
     top: 0;

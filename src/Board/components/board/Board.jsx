@@ -69,7 +69,7 @@ function removeTask(id){
         el[i].taskIds=el[i].taskIds.filter(ele=>ele!==id)
     }
     delete data.tasks[id]
-    // change(data)
+    setState(data)
 }
 const addColumn=()=>{
     
@@ -98,7 +98,7 @@ const addColumn=()=>{
     else{
         delete data.columns[id];
         data.columnOrder=data.columnOrder.filter(ele=>ele!==id)
-        // change(data)
+        setState(data)
     };
  }
  const onDragEnd = result =>{
@@ -178,7 +178,7 @@ const onDragStart=()=>{
 }
 const manualSave=()=>{
     localStorage.setItem('data49',JSON.stringify(data))
-    console.log('successfuk saved')
+    // console.log('successfuk saved')
 }
 const onLineLoad=()=>{
     const ref =firebase.firestore().collection('board');
@@ -197,16 +197,31 @@ const onLineSave=async(e)=>{
     });  
 }
 const search=()=>{
-    return
+   const input = document.getElementById('column')
+   const val = input && input.value
+   const data = data
+    if (val){
+        const tab = Object.values(data.tasks) 
+        const ret=tab.filter(ele=>ele.content===val)
+        console.log(ret)
+        const searchState = {
+            ...data,
+            tasks: {
+                ...data.tasks,
+               
+            },
+        };
+      setState(searchState)
+    }
 }
 
 return (
         <div className="board">
              <div className="boutton">
                  <div className="left" >
-                    <label className="lab" onMouseDown={props.tooglesave}>
+                    <label className="lab" onMouseDown={props.tooglesave} onClick={manualSave}>
                         <input type="checkbox" id="autosave" name="autosave" value='ok'/>
-                        <span className="checkmark"></span>
+                        <span className="checkmark" ></span>
                     </label>
                     <button onClick={onLineSave} id='onlinesave'>📤</button>
                     <button onClick={onLineLoad} id='onlineload'>📥</button>
@@ -214,7 +229,7 @@ return (
                 <input type='text' id='column' maxLength='9' />
                 <div>
                     <button onClick={addColumn}>➕</button>
-                    <button onClick={search}>🔍</button>
+                    <button onClick={search} id='search' >🔍</button>
                     <button onClick={manualSave} id='save'>💾</button>
                 </div>
             </div>
