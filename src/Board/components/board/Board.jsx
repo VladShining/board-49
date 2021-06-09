@@ -197,24 +197,28 @@ const onLineSave=async(e)=>{
     });  
 }
 const search=()=>{
-   const input = document.getElementById('column')
-   const val = input && input.value
-   const data = data
-    if (val){
-        const tab = Object.values(data.tasks) 
-        const ret=tab.filter(ele=>ele.content===val)
-        console.log(ret)
-        const searchState = {
-            ...data,
-            tasks: {
-                ...data.tasks,
-               
-            },
-        };
-      setState(searchState)
+        const element = document.getElementsByClassName("task");
+        const input = document.getElementById('column')
+        const val = input && input.value
+        if (val){
+            const tab = Object.values(data.tasks) 
+            const ret=tab.filter(ele=>ele.content===val)
+            if (ret[0]){      
+                for( let j=0 ;j<element.length ;j++){
+                    if(element[j].children[0].innerHTML !== ret[0].content)
+                        element[j].classList.add('undisplay')
+                }
+            }else
+                for( let j=0 ;j<element.length ;j++)
+                    element[j].classList.add('undisplay')
+        }
+}
+const resetSearch=()=>{
+    const element = document.getElementsByClassName("task");
+    for( let j=0 ;j<element.length ;j++){
+            element[j].classList.remove('undisplay')
     }
 }
-
 return (
         <div className="board">
              <div className="boutton">
@@ -226,7 +230,7 @@ return (
                     <button onClick={onLineSave} id='onlinesave'>📤</button>
                     <button onClick={onLineLoad} id='onlineload'>📥</button>
                  </div>
-                <input type='text' id='column' maxLength='9' />
+                <input type='text' id='column' maxLength='9' onChange={resetSearch} />
                 <div>
                     <button onClick={addColumn}>➕</button>
                     <button onClick={search} id='search' >🔍</button>
@@ -247,7 +251,7 @@ return (
                         const column =data.columns[columnId];
                         const lastCol=data.columnOrder;
                         const tasks = column.taskIds.map(taskId => data.tasks[taskId]);
-                        return (<Column key={column.id} lastCol={lastCol} column={column} tasks={tasks} addTask={addTask} deleteCol={removeColumn} delete={removeTask} index={index} /> );
+                        return (<Column key={column.id} lastCol={lastCol} column={column} tasks={tasks} addTask={addTask} taskSearch={search} deleteCol={removeColumn} delete={removeTask} index={index} /> );
                     })}
                     {provided.placeholder}
                     </div>

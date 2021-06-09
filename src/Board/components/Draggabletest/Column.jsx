@@ -46,22 +46,23 @@ const Header = styled.div`
 
 `;
 export default class Column extends Component {
-  isOpen=false;
-  isLast=()=>(this.props.lastCol[0]!==this.props.column.id)
-  delete=()=>{this.props.deleteCol(this.props.column.id)}
-  toogleCreate=()=>{this.isOpen=true}
-  closeCreate=()=>{this.isOpen=false}
-addTask=()=>{
-    this.props.addTask(this.props.column.id);
-}
-onKeyDownValue(event) {
-    if (event.charCode === 13 || event.charCode === 32) {
-        this.addTask();
-      }
-}
-  render() {
+    isOpen=false;
+    isLast=()=>(this.props.lastCol[0]!==this.props.column.id)
+    delete=()=>{this.props.deleteCol(this.props.column.id)}
+    toogleCreate=()=>{this.isOpen=true}
+    closeCreate=()=>{this.isOpen=false}
+    addTask=()=>{
+        this.props.addTask(this.props.column.id);
+    }
+    onKeyDownValue(event) {
+        if (event.charCode === 13 || event.charCode === 32) {
+            this.addTask();
+        }
+    }
+    render() {
         return (
-        <Draggable draggableId={this.props.column.id} index={this.props.index}>
+            <Draggable draggableId={this.props.column.id} index={this.props.index}>
+           
             {(provided)=>(
         <div className="drop" onMouseLeave={this.closeCreate} {...provided.draggableProps} ref={provided.innerRef}>
             <Header {...provided.dragHandleProps}>
@@ -115,7 +116,7 @@ onKeyDownValue(event) {
                     isDraggingOver={snapshot.isDraggingOver} 
                 >  
                     {this.props.tasks.map((task,index) => (
-                    <Task key={task.id} task={task} index={index} delete={this.props.delete} />
+                    <Task key={task.id} task={task} index={index}  delete={this.props.delete} />
                 ))
                     }  
                     {provided.placeholder}
