@@ -231,7 +231,7 @@ return (
                     <button onClick={onLineLoad} id='onlineload'>📥</button>
                  </div>
                 <input type='text' id='column' maxLength='9' onChange={resetSearch} />
-                <div>
+                <div className="left">
                     <button onClick={addColumn}>➕</button>
                     <button onClick={search} id='search' >🔍</button>
                     <button onClick={manualSave} id='save'>💾</button>

@@ -132,14 +132,14 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: scroll;
-    padding-bottom: 10px;
+    padding-top: 10px;
     box-sizing: border-box;
+    transform: rotateX(180deg);
   }
   .board {
     ::-webkit-scrollbar {
       display: initial !important;
       width: 10px !important;
-      position: absolute;
       height: 10px;
     }
     ::-webkit-scrollbar-thumb {
