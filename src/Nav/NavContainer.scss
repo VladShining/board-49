@@ -16,6 +16,9 @@
     padding: 0;
     border-radius: 50%;
   }
+  #logo span {
+    display: none;
+  }
   #menuSide {
     z-index: 3;
     width: 0;
@@ -51,6 +54,9 @@
   .navbar {
     height: 30px;
     justify-content: space-around;
+    #logo span {
+      display: none;
+    }
     svg {
       height: 30px;
       width: 30px;
@@ -88,6 +94,23 @@
 
 @media screen and (min-width: 1024px) {
   .navbar {
+    #logo {
+      text-align: center;
+      span {
+        display: initial !important;
+        position: absolute;
+        margin-top: 7px;
+        font-size: 20px;
+        margin-left: 10px;
+        font-weight: bold;
+        color: #ff0028;
+        animation: anim 7s ease-in-out alternate infinite;
+        font-family: monospace;
+      }
+      * {
+        text-decoration: none;
+      }
+    }
     .menu {
       ul {
         #main {
@@ -109,18 +132,23 @@
     }
     @keyframes anim {
       0% {
+        color: #ff0028;
         fill: #ff0028;
       }
       25% {
+        color: #ff5e00;
         fill: #ff5e00;
       }
       50% {
+        color: #11ece5;
         fill: #11ece5;
       }
       75% {
+        color: #92abcd;
         fill: #92abcd;
       }
       100% {
+        color: #fff;
         fill: #fff;
       }
     }
@@ -134,13 +162,18 @@
     height: 40px;
     align-content: flex-end;
     justify-content: space-around;
+    #logo span {
+      display: none !important;
+    }
     .menu {
       position: absolute;
-      #main,
-      #board {
+      #main {
         display: none !important;
       }
-
+      #board {
+        position: fixed;
+        right: 0;
+      }
       ul {
         margin: 0;
         padding: 0;

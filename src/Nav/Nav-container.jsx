@@ -39,7 +39,7 @@ const toogleMenu=()=>{
                   </g>
             </svg></div>
         
-            <div style={{cursor: "pointer" , zIndex:"999"}}> <Link to="/" ><svg xmlns="http://www.w3.org/2000/svg" width="629.233" height="539.933" viewBox="0 0 629.233 539.933">
+            <div style={{cursor: "pointer" , zIndex:"999"}} id="logo"> <Link to="/" ><svg xmlns="http://www.w3.org/2000/svg" width="629.233" height="539.933" viewBox="0 0 629.233 539.933">
                 <g id="Groupe_33" data-name="Groupe 33" transform="translate(-2649 -172.958)">
                   <g id="Groupe_32" data-name="Groupe 32" transform="translate(3278.234 712.891) rotate(180)">
                     <path id="Tracé_1" data-name="Tracé 1" d="M207.3,0,414.6,120.588H0Z" transform="matrix(0.5, -0.866, 0.866, 0.5, 0, 359.051)" fill="#fff"/>
@@ -50,7 +50,7 @@ const toogleMenu=()=>{
                   <line id="Ligne_4" data-name="Ligne 4" x1="209.92" y2="119.242" transform="translate(2963.58 293.5)" fill="none" stroke="#fff" strokeWidth="1"/>
                   <line id="Ligne_5" data-name="Ligne 5" y1="241.758" x2="0.08" transform="translate(2963.5 412.742)" fill="none" stroke="#fff" strokeWidth="1"/>
                 </g>
-              </svg></Link></div>
+              </svg> <span>NCA-49</span> </Link></div>
               <div style={{cursor: "pointer"}} >
                 <svg xmlns="http://www.w3.org/2000/svg" width="49.965" height="49.965" viewBox="0 0 49.965 49.965">
                 <g id="Groupe_30" data-name="Groupe 30" transform="translate(-347.5 -16.492)">
