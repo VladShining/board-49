@@ -16,6 +16,11 @@
     padding: 0;
     border-radius: 50%;
   }
+  #menuSide {
+    z-index: 3;
+    width: 0;
+    position: absolute;
+  }
   .menu {
     display: none;
     height: inherit;
@@ -24,7 +29,9 @@
       padding: 0;
       display: inherit;
       align-items: center;
-      li {
+      li,
+      li * {
+        text-decoration: none;
         margin: 0 1em;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -49,9 +56,12 @@
       width: 30px;
     }
     div {
-      &:nth-of-type(odd) {
+      &:nth-of-type(even) {
         display: none;
       }
+    }
+    #menuSide {
+      display: none;
     }
     .menu {
       display: inline-flex;
@@ -64,7 +74,7 @@
         padding: 0;
         display: inherit;
         align-items: center;
-        li {
+        li * {
           margin: 0 1em;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -126,13 +136,15 @@
     justify-content: space-around;
     .menu {
       position: absolute;
-      #main {
+      #main,
+      #board {
         display: none !important;
       }
+
       ul {
         margin: 0;
         padding: 0;
-        li {
+        li * {
           // margin: 0 10vw;
           animation: anim1 20s ease-in-out infinite alternate;
           text-transform: uppercase;
