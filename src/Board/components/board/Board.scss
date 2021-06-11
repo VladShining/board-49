@@ -4,6 +4,15 @@
   justify-content: center;
   align-items: stretch;
   align-content: flex-start;
+  .notif {
+    color: #ff0028;
+    font-size: 12px;
+    font-family: monospace;
+    position: absolute;
+    margin: 0;
+    z-index: 2;
+    text-transform: capitalize;
+  }
 }
 .boards {
   display: flex;
@@ -34,6 +43,8 @@
     margin: 2px 1em;
   }
   input {
+    margin-left: 0;
+    margin-right: 0;
     outline: none;
     background-color: #040609;
     color: #92abcd;
@@ -126,7 +137,16 @@
     }
   }
 }
-
+@media screen and (max-width: 360px) {
+  .boutton {
+    input {
+      width: 100px;
+    }
+    * {
+      margin: 0 0;
+    }
+  }
+}
 @media screen and (min-width: 1024px) {
   .boards {
     width: 100vw;

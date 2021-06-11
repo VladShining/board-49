@@ -9,13 +9,12 @@ import initialData from './initData';
 import './Board.scss';
 
 function Board(props) {
-
     const dataStore=localStorage.getItem("data49");
-    let dataUsed =initialData
-    if (dataStore){
-        dataUsed = JSON.parse(dataStore)
+    if (!dataStore){
+        localStorage.setItem('data49',JSON.stringify(initialData))
     }
-    const [data, setState] = useState(dataUsed)
+    const [text,setMessage]=useState('');
+    const [data, setState] = useState(JSON.parse(dataStore))
     
 // useEffect(() => {
 //     const firestore = firebase.firestore();
@@ -43,7 +42,10 @@ useEffect(() => {
 //     }
 //     update()
 // }
-
+const showMessage=(msg)=>{
+    setMessage(msg)
+    setTimeout(()=>{setMessage('')},2000)   
+}
 const addTask=(id)=>{
     let el = document.getElementById('task').value;
     if(el){
@@ -56,7 +58,7 @@ const addTask=(id)=>{
                 [elID]:{id:elID,content:el} 
             }}
             setState(newtask)
-            
+            showMessage('tache ajouter')
 }
 document.getElementById('task').value='';
 }
@@ -70,6 +72,8 @@ function removeTask(id){
     }
     delete data.tasks[id]
     setState(data)
+    showMessage('tache supprimer')
+
 }
 const addColumn=()=>{
     
@@ -85,6 +89,7 @@ const addColumn=()=>{
         }
      }
      setState(newColumn);
+     showMessage('Colonne ajouter')
      
     }
     document.getElementById('column').value=''
@@ -99,6 +104,8 @@ const addColumn=()=>{
         delete data.columns[id];
         data.columnOrder=data.columnOrder.filter(ele=>ele!==id)
         setState(data)
+        showMessage('Colonne supprimer')
+
     };
  }
  const onDragEnd = result =>{
@@ -178,22 +185,32 @@ const onDragStart=()=>{
 }
 const manualSave=()=>{
     localStorage.setItem('data49',JSON.stringify(data))
-    // console.log('successfuk saved')
+    showMessage('Enregistrement...')
+
 }
 const onLineLoad=()=>{
     const ref =firebase.firestore().collection('board');
     ref.doc("data").get().then((doc) => {
         const Data = doc.data()
         setState(Data)
+        showMessage('Telechargement effectué')
+
     }).catch((error) => {
         console.log("Error getting document:", error);
+        showMessage('Vous êtes offline')
+
     });
 }
 const onLineSave=async(e)=>{
     const ref =firebase.firestore().collection('board');
+    showMessage('Sauvegarde enligne...')
     await ref.doc("data").set(data).then(() => {
+        showMessage('Sauvegarde effectuer')
+
     }).catch((error) => {
         console.log("Error writing document: ", error);
+        showMessage('Vous êtes offline')
+
     });  
 }
 const search=()=>{
@@ -203,14 +220,17 @@ const search=()=>{
         if (val){
             const tab = Object.values(data.tasks) 
             const ret=tab.filter(ele=>ele.content===val)
-            if (ret[0]){      
+            if (ret[0]){  
+                showMessage(`${ret.length}  element trouver`)
                 for( let j=0 ;j<element.length ;j++){
                     if(element[j].children[0].innerHTML !== ret[0].content)
                         element[j].classList.add('undisplay')
                 }
-            }else
+            }else{
+                 showMessage('Aucun element trouver')
                 for( let j=0 ;j<element.length ;j++)
                     element[j].classList.add('undisplay')
+            }
         }
 }
 const resetSearch=()=>{
@@ -221,6 +241,7 @@ const resetSearch=()=>{
 }
 return (
         <div className="board">
+            <p className="notif">{text}</p>
              <div className="boutton">
                  <div className="left" >
                     <label className="lab" onMouseDown={props.tooglesave} onClick={manualSave}>
@@ -231,8 +252,8 @@ return (
                     <button onClick={onLineLoad} id='onlineload'>📥</button>
                  </div>
                 <input type='text' id='column' maxLength='9' onChange={resetSearch} />
-                <div className="left">
-                    <button onClick={addColumn}>➕</button>
+                <div className="left" >
+                    <button onClick={addColumn} >➕</button>
                     <button onClick={search} id='search' >🔍</button>
                     <button onClick={manualSave} id='save'>💾</button>
                 </div>

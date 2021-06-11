@@ -21,6 +21,7 @@ const Title = styled.div`
     max-width:70px;
     text-overflow: ellipsis;
     overflow:hidden;
+    text-transform: capitalize;
 `;
 const Header = styled.div`
     border: 1px solid #111;
@@ -46,6 +47,7 @@ const Header = styled.div`
 
 `;
 export default class Column extends Component {
+   
     isOpen=false;
     isLast=()=>(this.props.lastCol[0]!==this.props.column.id)
     delete=()=>{this.props.deleteCol(this.props.column.id)}
