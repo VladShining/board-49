@@ -9,9 +9,11 @@ import initialData from './initData';
 import './Board.scss';
 
 function Board(props) {
+    const userId=props.userId;
     const dataStore=localStorage.getItem("data49");
     if (!dataStore){
         localStorage.setItem('data49',JSON.stringify(initialData))
+        firebase.firestore().collection('board').doc(userId).set(initialData)
     }
     const [text,setMessage]=useState('');
     const [data, setState] = useState(JSON.parse(dataStore))
@@ -190,7 +192,7 @@ const manualSave=()=>{
 }
 const onLineLoad=()=>{
     const ref =firebase.firestore().collection('board');
-    ref.doc("data").get().then((doc) => {
+    ref.doc(userId).get().then((doc) => {
         const Data = doc.data()
         setState(Data)
         showMessage('Telechargement effectué')
@@ -201,10 +203,10 @@ const onLineLoad=()=>{
 
     });
 }
-const onLineSave=async(e)=>{
+const onLineSave=async()=>{
     const ref =firebase.firestore().collection('board');
     showMessage('Sauvegarde enligne...')
-    await ref.doc("data").set(data).then(() => {
+    await ref.doc(userId).set(data).then(() => {
         showMessage('Sauvegarde effectuer')
 
     }).catch((error) => {

@@ -13,10 +13,12 @@ import 'firebase/auth';
 function App() {
 
   const [isLogin,setUser] = useState(false);
+  const [userId,setUserId] =useState('');
   const authListener = () => {
     firebase.auth().onAuthStateChanged(user=>{
         if(user){
-            setUser(user.uid);
+            setUser(true);
+            setUserId(user.uid)
         }else{
             setUser(false);
         }
@@ -29,11 +31,11 @@ function App() {
     <div className="App">
      {isLogin ? (
      <BrowserRouter>
-      <Nav/>
+      <Nav />
       <Switch>
         <Redirect exact path="/" to='/home' />
         <Route exact path="/home" component ={Main} />
-        <Route path="/board" component ={BoardContainer } />
+        <Route path="/board" > <BoardContainer user={userId}/> </Route>
         <Route path="/setting" component={()=> <Config />} />
         {/* <Route path="/auth" component={Auth} /> */}
         <Route component={Forofor}/>
