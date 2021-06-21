@@ -7,7 +7,7 @@ export default function MenuSide(props) {
         <div className="menuside">
             <ul onClick={props.toogleMenu}>
                 <li>
-                <Link to="/" >Accueil</Link>
+                <Link to="/home" >Accueil</Link>
                 </li>
                 <li>
                 <Link to="/board" >Board</Link>
@@ -15,8 +15,8 @@ export default function MenuSide(props) {
                 <li>
                 <Link to="/setting" >Configuration</Link>
                 </li>
-                <li>
-                <Link to="/auth" > Deconnexion</Link> 
+                <li onClick ={props.handleLogout}>
+                 Deconnexion
                 </li>
             </ul>
         </div>

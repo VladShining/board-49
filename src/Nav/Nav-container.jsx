@@ -1,7 +1,9 @@
 import React,{useState} from 'react'
 import './NavContainer.scss'
-import {Link} from 'react-router-dom';
+import {Link ,NavLink} from 'react-router-dom';
 import MenuSide from './MenuSide';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default function Nav() {
   const [isMenu, setstate] = useState(false)
@@ -10,9 +12,13 @@ const toogleMenu=()=>{
   setstate(false)
   else setstate(true)
 }
+const handleLogout = () =>{
+  firebase.auth().signOut();
+  
+};
     return (
   <div className="navbar">
-           <div id="menuSide"> {isMenu && <MenuSide toogleMenu={toogleMenu} />}</div>
+           <div id="menuSide"> {isMenu && <MenuSide toogleMenu={toogleMenu} handleLogout={handleLogout}/>}</div>
             <div style={{cursor: "pointer",zIndex:"4"}} onClick={toogleMenu} >
               <svg xmlns="http://www.w3.org/2000/svg" width="49.965" height="49.965" viewBox="0 0 49.965 49.965">
                   <g id="Groupe_31" data-name="Groupe 31" transform="translate(-19.5 -15.018)">
@@ -39,7 +45,7 @@ const toogleMenu=()=>{
                   </g>
             </svg></div>
         
-            <div style={{cursor: "pointer" , zIndex:"999"}} id="logo"> <Link to="/" ><svg xmlns="http://www.w3.org/2000/svg" width="629.233" height="539.933" viewBox="0 0 629.233 539.933">
+            <div style={{cursor: "pointer" , zIndex:"999"}} id="logo"> <Link to="/home" ><svg xmlns="http://www.w3.org/2000/svg" width="629.233" height="539.933" viewBox="0 0 629.233 539.933">
                 <g id="Groupe_33" data-name="Groupe 33" transform="translate(-2649 -172.958)">
                   <g id="Groupe_32" data-name="Groupe 32" transform="translate(3278.234 712.891) rotate(180)">
                     <path id="Tracé_1" data-name="Tracé 1" d="M207.3,0,414.6,120.588H0Z" transform="matrix(0.5, -0.866, 0.866, 0.5, 0, 359.051)" fill="#fff"/>
@@ -63,10 +69,10 @@ const toogleMenu=()=>{
 
               <div className="menu">
                 <ul>
-                  <li id="main"> <Link to="/" >Accueil</Link> </li>
-                  <li id="board"> <Link to="/board" >Board</Link> </li>
-                  <li> <Link to="/setting" >Configuration</Link> </li>
-                  <li> <Link to="/auth" > Deconnexion</Link> </li>  
+                  <li id="main"> <NavLink to="/home" >Accueil</NavLink> </li>
+                  <li id="board"> <NavLink to="/board" >Board</NavLink> </li>
+                  <li> <NavLink to="/setting" >Configuration</NavLink> </li>
+                  <li onClick ={handleLogout}>  Deconnexion </li>  
                 </ul>
               </div>
 </div>

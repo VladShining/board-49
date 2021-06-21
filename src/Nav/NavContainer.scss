@@ -28,6 +28,9 @@
     display: none;
     height: inherit;
     ul {
+      .active {
+        color: #ff0028;
+      }
       margin: 0;
       padding: 0;
       display: inherit;
@@ -80,6 +83,7 @@
         padding: 0;
         display: inherit;
         align-items: center;
+        li,
         li * {
           margin: 0 1em;
           overflow: hidden;
@@ -113,6 +117,9 @@
     }
     .menu {
       ul {
+        .active {
+          color: #ff0028;
+        }
         #main {
           display: inherit;
         }
@@ -177,6 +184,7 @@
       ul {
         margin: 0;
         padding: 0;
+        li,
         li * {
           // margin: 0 10vw;
           animation: anim1 20s ease-in-out infinite alternate;
