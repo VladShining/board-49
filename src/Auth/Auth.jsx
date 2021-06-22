@@ -20,7 +20,7 @@ const Auth = () => {
    const handleSignUp = () =>{
     clearErrors();
        firebase.auth().createUserWithEmailAndPassword(email,password).then((user)=>{
-        
+     
        })
        .catch((err)=>{
            switch (err.code){
