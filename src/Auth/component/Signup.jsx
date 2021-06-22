@@ -3,7 +3,7 @@ import '../style/Auth.scss'
 
 export default function Signup(props) {
     return (
-        <div>
+        
              <div className="SignupContainer">
                 <input type="text"
                     autoFocus
@@ -20,6 +20,6 @@ export default function Signup(props) {
                 <p> {props.passwordError}</p>
                 <button onClick={props.handleSignUp}>Enregistrer</button>
             </div>
-        </div>
+      
     )
 }

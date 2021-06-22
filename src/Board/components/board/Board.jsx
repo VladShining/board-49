@@ -11,10 +11,8 @@ import './Board.scss';
 function Board(props) {
     const userId=props.userId;
     const dataStore=localStorage.getItem("data49");
-   
     if (!dataStore){
         localStorage.setItem('data49',JSON.stringify(initialData))
-        userId && firebase.firestore().collection('board').doc(userId).set(data)
     }
     const [text,setMessage]=useState('');
     const [data, setState] = useState(JSON.parse(dataStore))
